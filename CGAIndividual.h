@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <random>
 #include "CMax3SatProblem.h"
 
 class CGAIndividual
@@ -23,6 +24,9 @@ private:
 };
 
 //TODO:
-//jak wczytywaæ te klauzule i iniciowaæ zmienne
+// 
+//miej juz osobniki w populacji potem implementacja ponizej
 //mutation, crossover 
 //konstruktor kopuj¹cy -> kopiujesz wektor i essa.
+//WORKS:
+//jak wczytywaæ te klauzule i iniciowaæ zmienne -> prawie done ok

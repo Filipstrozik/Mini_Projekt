@@ -1,9 +1,18 @@
 #pragma once
+#include <iostream>
 class CClause
 {
 public:
 	CClause();
-	CClause(int iFirst, int iSecond, int iThird);
+	CClause(int iFirst, int iSecond, int iThird) {
+		i_first = iFirst; 
+		i_second = iSecond;
+		i_third = iThird;
+		b_firstFlag = false;
+		b_SecondFlag = false;
+		b_ThirdFlag = false;
+		std::cout << "Stworzono Clause: (" << i_first << " " << i_second << " " << i_third << ")" <<std::endl;
+	};
 
 	//getters
 	int iGetFirst();
@@ -18,7 +27,8 @@ public:
 	void iSetFirst(int iNewFirst);
 	void iSetSecond(int iNewSecond);
 	void iSetThird(int iNewThird);
-	void iFlipFirstFlag();
+	//te wlagi to nie wiem czy potrzebne w ogole
+	void iFlipFirstFlag(); 
 	void iFlipSecondFlag();
 	void iFlipThirdFlag();
 

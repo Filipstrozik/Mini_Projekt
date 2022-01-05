@@ -149,6 +149,10 @@
     <ClCompile Include="CGAIndividual.cpp" />
     <ClCompile Include="CGAOptimizer.cpp" />
     <ClCompile Include="CMax3SatProblem.cpp" />
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

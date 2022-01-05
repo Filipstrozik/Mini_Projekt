@@ -1,5 +1,5 @@
 #pragma once
-int SIZE_OF_POP = 50;
+int SIZE_OF_POP = 50; // ilosc populacji ilosc osobnikow
 double CROSS_PROBABILTY = 0.5;
 double MUTATION_PROBABILITY = 0.5;
 #include "CGAIndividual.h"
@@ -20,7 +20,7 @@ private:
 	int i_popSize;
 	double d_xProbability;
 	double d_mutProbability;
-	vector<CGAIndividual> vPopulation; // populacja
+	std::vector<CGAIndividual*> vPopulation; // populacja
 	CGAIndividual* pc_bestIndividual;
 	CGAIndividual* pc_ChooseParent();
 	CGAIndividual** pc_Crossover(CGAIndividual* pcParent1, CGAIndividual* pcParent2); // do individual
