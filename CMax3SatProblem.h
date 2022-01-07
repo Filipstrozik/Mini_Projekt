@@ -10,8 +10,11 @@ public:
 	CMax3SatProblem();
 	bool bLoad(std::string path);
 	double dCompute(std::vector<bool> vecSolution);
+	int iGetNumberOfVar();
 
 private:
+	int i_numberOfVar;
 	std::vector<CClause*> vec_clausesProblem;
+	int i_numberOfClauses;
 };
 

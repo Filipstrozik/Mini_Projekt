@@ -4,7 +4,10 @@
 using namespace std;
 
 CMax3SatProblem::CMax3SatProblem() {
+	cout << "CMax3SatProblem()" << endl;
 	vec_clausesProblem.reserve(1000);
+	i_numberOfClauses = 0;
+	i_numberOfVar = 0;
 }
 
 bool CMax3SatProblem::bLoad(std::string sPath) {
@@ -15,38 +18,80 @@ bool CMax3SatProblem::bLoad(std::string sPath) {
 		cout << "blad przy otwiernaiu pliku" << endl;
 		return false;
 	}
+	int min = 1000;
+	int max = 0;
 	int s1 = 0;
+	bool f1 = false;
 	int s2 = 0;
+	bool f2 = false;
 	int s3 = 0;
-
+	bool f3 = false;
+	char sign;
 	if (file.is_open()) {
 
 		while (!file.eof()) {
+			f1 = false;
+			f2 = false;
+			f3 = false;
 			file.ignore(100, ' ');
+			sign = file.peek();
+			if (sign == '-') {
+				f1 = true;
+				file.ignore();
+			}
 			file >> s1;
-			//cout << s1 << endl;
-			file.ignore(100, ' ');
+			if (max < abs(s1)) max = s1;
+			file.ignore(2);
+			sign = file.peek();
+			if (sign == '-') {
+				f2 = true;
+				file.ignore();
+			}
 			file >> s2;
-			//cout << s2 << endl;;
-			file.ignore(100, ' ');
+			if (max < abs(s2)) max = s2;
+			file.ignore(2);
+			sign = file.peek();
+			if (sign == '-') {
+				f3 = true;
+				file.ignore();
+			}
 			file >> s3;
-			//cout << s3 << endl;
+			if (max < abs(s3)) max = s3;
 			file.ignore(100, '\n');
-			// mamy inty pokolei
-			vec_clausesProblem.push_back(new CClause(s1, s2, s3));
+			vec_clausesProblem.push_back(new CClause(f1,s1,f2,s2,f3,s3));
+			i_numberOfClauses++;
+			
 		}
-		
+		i_numberOfVar = max;
 		file.close();
 	}
 	return true;
 
 }
 
+double CMax3SatProblem::dCompute(std::vector<bool> vecSolution) {
+	//dla kazdej klauzuli oblicz czy jest spelniona czy nie
+	// oblicz ile klauzyl jest spe³nionych
+	double counterGoodClauses = 0.0;
+	//cout << "R: " << endl;
+	for (int i = 0; i < vecSolution.size(); i++) {
+		//cout << vecSolution.at(i);
+	}
+	//cout << endl;
+	for (int i = 0; i < (int) vec_clausesProblem.size(); i++) {
+		if (vec_clausesProblem.at(i)->bCompute(vecSolution) ){
+			counterGoodClauses += 1.0;
+			
+		}
+		//cout << "K: " << i << " = " << vec_clausesProblem.at(i)->bCompute(vecSolution) << endl;
+	}
+	//cout << "nr GOODclauses : " << counterGoodClauses << " nr clauses: " << i_numberOfClauses << "fitness: "<< (double)(counterGoodClauses / i_numberOfClauses) <<endl;
+	return (double)(counterGoodClauses / i_numberOfClauses);
+}
 
-/*
- first = std::cin.get();     // get one character
-  std::cin.ignore(256,' ');   // ignore until space
+int CMax3SatProblem::iGetNumberOfVar()
+{
+	return i_numberOfVar;
 
-  last = std::cin.get();      // get one character
+}
 
-*/

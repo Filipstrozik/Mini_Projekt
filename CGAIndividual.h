@@ -2,24 +2,29 @@
 #include <vector>
 #include <random>
 #include "CMax3SatProblem.h"
+#include <iostream>
 
 class CGAIndividual
 {
 public:
 	CGAIndividual();
-	CGAIndividual* pcCrossover(CGAIndividual& cOther);
+
+	void vInitialize(CMax3SatProblem& cProblem);
+
+	void pcCrossover(CGAIndividual* pcChild1, CGAIndividual* pcChild2 , CGAIndividual* cOther);
 	double dFitness();
 	void vMutation();
+
+	std::vector<bool> vGetGenotype() { return vec_genotype; }; // czy wskznik????
+
+	void vCalculateFitness(CMax3SatProblem& cProblem);
+
+	void vShow();
+
 private:
 	std::vector<bool> vec_genotype;
-	//rep:
-	// vec = [0111];
-	// v1 = false v2 = true, v3 = true, v4 = true
-	// dla klauzuli (-1,2,4) => (--1,2,4) obie sa spelnione
-	// lecz dla (-1,-3,-2) to jest niespelniona
-	// ale r1 sprawia ze (--1,-3,-2) i jest wiec sukces
 	double d_currentFitness;
-	void vCalculateFitness(CMax3SatProblem& cProblem);
+	
 
 };
 

@@ -1,26 +1,40 @@
 #pragma once
 #include <iostream>
+#include <vector>
+
 class CClause
 {
 public:
 	CClause();
-	CClause(int iFirst, int iSecond, int iThird) {
-		i_first = iFirst; 
-		i_second = iSecond;
-		i_third = iThird;
-		b_firstFlag = false;
-		b_SecondFlag = false;
-		b_ThirdFlag = false;
-		std::cout << "Stworzono Clause: (" << i_first << " " << i_second << " " << i_third << ")" <<std::endl;
+	CClause( int iFirst, int iSecond, int iThird) {
+		b_FirstFlag = bSetFlag(iFirst);
+		b_SecondFlag = bSetFlag(iSecond);
+		b_ThirdFlag = bSetFlag(iThird);
+		i_first = abs(iFirst); 
+		i_second = abs(iSecond);
+		i_third = abs(iThird);
+	
+		std::cout << "Stworzono Clause: (" << b_FirstFlag << " " << i_first << ", " << b_SecondFlag << " " << i_second << ", " << b_ThirdFlag << " " << i_third << ")" << std::endl;
+	};
+
+	CClause(bool bFirstFlag, int iFirst, bool bSecondFlag, int iSecond, bool bThirdFlag, int iThird) {
+		b_FirstFlag = bFirstFlag;
+		b_SecondFlag = bSecondFlag;
+		b_ThirdFlag = bThirdFlag;
+		i_first = abs(iFirst);
+		i_second = abs(iSecond);
+		i_third = abs(iThird);
+
+		std::cout << "Stworzono Clause: (" << b_FirstFlag << " " << i_first << ", " << b_SecondFlag << " " << i_second << ", " << b_ThirdFlag << " " << i_third << ")" << std::endl;
 	};
 
 	//getters
-	int iGetFirst();
-	int iGetSecond();
-	int iGetThird();
-	bool bGetFirstFlag();
-	bool bGetSecondFlag();
-	bool bGetThirdFlag();
+	int iGetFirst() { return i_first; };
+	int iGetSecond() { return i_second; };
+	int iGetThird() { return i_third; };
+	bool bGetFirstFlag() { return b_FirstFlag; };
+	bool bGetSecondFlag() { return b_SecondFlag; };
+	bool bGetThirdFlag() { return b_ThirdFlag; };
 
 
 	//setters
@@ -32,13 +46,17 @@ public:
 	void iFlipSecondFlag();
 	void iFlipThirdFlag();
 
+	bool bCompute(std::vector<bool> vecSolution);
+	bool bSetFlag(int iVar);
+	bool zmien(bool flaga, bool wynik);
 private:
 	int i_first;
 	int i_second;
 	int i_third;
-	bool b_firstFlag;
+	bool b_FirstFlag;
 	bool b_SecondFlag;
 	bool b_ThirdFlag;
+	
 
 };
 

@@ -2,15 +2,18 @@
 #include <string>
 #include "CMax3SatProblem.h"
 #include "CGAIndividual.h"
+#include "CGAOptimizer.h"
 using namespace std;
 
 
 int main() {
     cout << "Test " << endl;
-    CMax3SatProblem p;
-    p.bLoad("test.txt");
+    CGAOptimizer Optymalizator;
+    Optymalizator.vInitialize("test.txt");
+    Optymalizator.vTestFitness();
+    Optymalizator.vRunIteration();
 
-    CGAIndividual ind;
+    
 
 
     return 0;
