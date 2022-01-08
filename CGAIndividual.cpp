@@ -5,6 +5,20 @@ CGAIndividual::CGAIndividual(){ //stworzenie osobnika domyslnie nie losowo! -> p
 	vec_genotype.reserve(1000);
 
 }
+CGAIndividual::~CGAIndividual() { //stworzenie osobnika domyslnie nie losowo! -> przenies do innej funkcji
+	
+	
+
+}
+
+CGAIndividual::CGAIndividual(CGAIndividual* cOther)
+{
+	vec_genotype.reserve(1000);
+	for (int i = 0; i < cOther->vec_genotype.size(); i++) {
+		this->vec_genotype.push_back(cOther->vec_genotype.at(i));
+	}
+	d_currentFitness = cOther->d_currentFitness;
+}
 
 void CGAIndividual::vInitialize(CMax3SatProblem& cProblem) {
 	d_currentFitness = 0.0;
@@ -35,31 +49,34 @@ double CGAIndividual::dFitness()
 	return d_currentFitness;
 }
 
-void CGAIndividual::vMutation()
+void CGAIndividual::vMutation(int dMutProb)
 {
 	//dla kazdego genu losyjemy czy odwarcamy na przeciwny
 	int iDoMutate;
-	for (int i = 0; i < vec_genotype.size(); i++) {
+	for (int i = 0; i < (int) (vec_genotype.size()/20); i++) {
 		iDoMutate = rand() % 100;
-		if (iDoMutate < 100) {
-			this->vec_genotype.at(i) = !vec_genotype.at(i);
+		if (iDoMutate < dMutProb) {
+			//std::cout << i << " ";
+			int index = rand() % vec_genotype.size();
+			this->vec_genotype.at(index) = !vec_genotype.at(index);
 		}
 	}
 }
 
 void CGAIndividual::vShow()
 {
-	std::cout << "\tR:= ";
+	std::cout << "R:= ";
 	for (int i = 0; i < vec_genotype.size(); i++) {
 		std::cout << vec_genotype.at(i);
 	}
-	std::cout << std::endl;
-	std::cout << "\tdFitness:= " << d_currentFitness<<std::endl;
+	//std::cout << std::endl;
+	std::cout << "\t= " << d_currentFitness<<std::endl;
 }
 
 void CGAIndividual::vCalculateFitness(CMax3SatProblem& cProblem)
 {
 	d_currentFitness = cProblem.dCompute(vec_genotype);
 }
+
 
 

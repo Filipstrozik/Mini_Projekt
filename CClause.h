@@ -14,7 +14,7 @@ public:
 		i_second = abs(iSecond);
 		i_third = abs(iThird);
 	
-		std::cout << "Stworzono Clause: (" << b_FirstFlag << " " << i_first << ", " << b_SecondFlag << " " << i_second << ", " << b_ThirdFlag << " " << i_third << ")" << std::endl;
+		//std::cout << "Stworzono Clause: (" << b_FirstFlag << " " << i_first << ", " << b_SecondFlag << " " << i_second << ", " << b_ThirdFlag << " " << i_third << ")" << std::endl;
 	};
 
 	CClause(bool bFirstFlag, int iFirst, bool bSecondFlag, int iSecond, bool bThirdFlag, int iThird) {
@@ -25,7 +25,7 @@ public:
 		i_second = abs(iSecond);
 		i_third = abs(iThird);
 
-		std::cout << "Stworzono Clause: (" << b_FirstFlag << " " << i_first << ", " << b_SecondFlag << " " << i_second << ", " << b_ThirdFlag << " " << i_third << ")" << std::endl;
+		//std::cout << "Stworzono Clause: (" << b_FirstFlag << " " << i_first << ", " << b_SecondFlag << " " << i_second << ", " << b_ThirdFlag << " " << i_third << ")" << std::endl;
 	};
 
 	//getters

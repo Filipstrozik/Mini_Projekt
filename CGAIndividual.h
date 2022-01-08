@@ -8,13 +8,15 @@ class CGAIndividual
 {
 public:
 	CGAIndividual();
+	~CGAIndividual();
+	CGAIndividual(CGAIndividual* cOther);
 
 	void vInitialize(CMax3SatProblem& cProblem);
 
 	void pcCrossover(CGAIndividual* pcChild1, CGAIndividual* pcChild2 , CGAIndividual* cOther);
 	double dFitness();
-	void vMutation();
-
+	void vMutation(int dMutProb);
+	
 	std::vector<bool> vGetGenotype() { return vec_genotype; }; // czy wskznik????
 
 	void vCalculateFitness(CMax3SatProblem& cProblem);
@@ -29,9 +31,3 @@ private:
 };
 
 //TODO:
-// 
-//miej juz osobniki w populacji potem implementacja ponizej
-//mutation, crossover 
-//konstruktor kopuj¹cy -> kopiujesz wektor i essa.
-//WORKS:
-//jak wczytywaæ te klauzule i iniciowaæ zmienne -> prawie done ok

@@ -10,11 +10,14 @@ int main() {
     cout << "Test " << endl;
     CGAOptimizer Optymalizator;
     Optymalizator.vInitialize("test.txt");
-    Optymalizator.vTestFitness();
-    Optymalizator.vRunIteration();
 
+    for (int i = 0; i < 50; i++) {
+        Optymalizator.vRunIteration();
+        cout << i << " ";
+    }
+
+    cout << endl;
+    Optymalizator.vShowSolutions();
     
-
-
     return 0;
 }
