@@ -1,11 +1,13 @@
 #include "CGAIndividual.h"
 #include <time.h>
-CGAIndividual::CGAIndividual(){ //stworzenie osobnika domyslnie nie losowo! -> przenies do innej funkcji
+
+CGAIndividual::CGAIndividual(){
 	d_currentFitness = 0.0;
 	vec_genotype.reserve(1000);
 
 }
-CGAIndividual::~CGAIndividual() { //stworzenie osobnika domyslnie nie losowo! -> przenies do innej funkcji
+
+CGAIndividual::~CGAIndividual() { 
 	
 	
 
@@ -21,7 +23,7 @@ CGAIndividual::CGAIndividual(CGAIndividual* cOther)
 }
 
 void CGAIndividual::vInitialize(CMax3SatProblem& cProblem) {
-	d_currentFitness = 0.0;
+	//d_currentFitness = 0.0;
 	for (int i = 0; i <= cProblem.iGetNumberOfVar(); i++) {
 		vec_genotype.push_back(rand() % 2);
 	}
@@ -51,7 +53,6 @@ double CGAIndividual::dFitness()
 
 void CGAIndividual::vMutation(int dMutProb)
 {
-	//dla kazdego genu losyjemy czy odwarcamy na przeciwny
 	int iDoMutate;
 	for (int i = 0; i < (int) (vec_genotype.size()/20); i++) {
 		iDoMutate = rand() % 100;

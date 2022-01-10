@@ -1,17 +1,14 @@
 #include <iostream>
 #include <string>
-#include "CMax3SatProblem.h"
-#include "CGAIndividual.h"
 #include "CGAOptimizer.h"
 using namespace std;
 
 
 int main() {
-    cout << "Test " << endl;
     CGAOptimizer Optymalizator;
     Optymalizator.vInitialize("test.txt");
 
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 10; i++) {
         Optymalizator.vRunIteration();
         cout << i << " ";
     }

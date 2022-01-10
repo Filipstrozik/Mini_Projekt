@@ -5,7 +5,7 @@ CGAOptimizer::CGAOptimizer() {
 	i_popSize = 200; //TODO trzeba zmienic na jakies zdefiniowane
 	d_xProbability = 0.40;
 	d_mutProbability = 0.40;
-	vPopulation.reserve(i_popSize);
+	vPopulation.reserve(i_popSize+1);
 	pc_Max3SatProblem = NULL;
 	cout << "CGAOptimizer()" << endl << "i_popSize =" << i_popSize << endl << "d_xProbability ="<< d_xProbability << endl << "d_mutProbability ="<< d_mutProbability << endl;
 
@@ -16,27 +16,30 @@ CGAOptimizer::~CGAOptimizer()
 	for (int i = 0; i < vPopulation.size(); i++) {
 		delete vPopulation.at(i);
 	}
+	vPopulation.clear();
+	delete pc_Max3SatProblem;
 }
 
 void CGAOptimizer::vInitialize(std::string sPath) {
 	pc_Max3SatProblem = new CMax3SatProblem();
 	pc_Max3SatProblem->bLoad(sPath);
 	srand((int)time(NULL));
-	CGAIndividual* pc_Indiv;
+	///CGAIndividual* pc_Indiv;
 	for (int i = 0; i < i_popSize; i++) {
-		pc_Indiv = new CGAIndividual();
-		pc_Indiv->vInitialize(*pc_Max3SatProblem); // hmmm? adres czy wskaznik?
-		vPopulation.push_back(pc_Indiv);
+		//pc_Indiv = new CGAIndividual();
+		//pc_Indiv->vInitialize(*pc_Max3SatProblem); // hmmm? adres czy wskaznik?
+		//vPopulation.push_back(pc_Indiv);
+		vPopulation.push_back(new CGAIndividual());
+		vPopulation.at(i)->vInitialize(*pc_Max3SatProblem);
 	}
-	// delete?
 }
 
 void CGAOptimizer::vRunIteration()
 {
 	vPopulation.at(0)->vShow();
 	std::vector<CGAIndividual*> newVPop;
-	newVPop.reserve(200);//czy tyle samo co populacja
-	//wsadz 10 najlepszych z vPop
+	newVPop.reserve(i_popSize);
+	//wsadz 10 najlepszych z vPop "elitizm"
 	for (int i = 0; i < (int)(vPopulation.size()/40) ; i++) {
 		CGAIndividual* temp = new CGAIndividual(vPopulation.at(i));
 		newVPop.push_back(temp);
@@ -63,7 +66,7 @@ void CGAOptimizer::vRunIteration()
 			//cout << "NATEPUJE KRZYZOWANIE " << endl;
 			dziecko1 = new CGAIndividual;
 			dziecko2 = new CGAIndividual;
-			rodzic1->pcCrossover(dziecko1, dziecko2, rodzic2); // ok dziala
+			rodzic1->pcCrossover(dziecko1, dziecko2, rodzic2); 
 		}
 		else {
 			//cout << "NIE MA KRZYZOWANIE: " << endl;
@@ -127,6 +130,10 @@ void CGAOptimizer::vRunIteration()
 	for (int i = 0; i < vPopulation.size(); i++) {
 		delete vPopulation.at(i);
 	}
+	cout << vPopulation.size() << endl;
+	vPopulation.clear();
+	cout << vPopulation.capacity() << endl;
+	cout << vPopulation.size() << endl;
 
 	vPopulation = newVPop;
 	vSort();
@@ -139,17 +146,14 @@ void CGAOptimizer::vSort() {
 	sort(vPopulation.begin(), vPopulation.end(), [](CGAIndividual l,CGAIndividual r) { return l.dFitness() > r.dFitness(); });
 }
 
-void CGAOptimizer::vShowSolutions()
-{
-	//sort(vPopulation.begin(), vPopulation.end(), [](CGAIndividual l, CGAIndividual r) { return l.dFitness() > r.dFitness(); });
+void CGAOptimizer::vShowSolutions(){
 	for (int i = 0; i < vPopulation.size(); i++) {
 		cout << i << "\t";
 		vPopulation.at(i)->vShow();
 	}
 }
 
-CMax3SatProblem* CGAOptimizer::pc_GetOptimizer()
-{
+CMax3SatProblem* CGAOptimizer::pc_GetOptimizer(){
 	if (pc_Max3SatProblem != NULL) {
 		return pc_Max3SatProblem;
 	}
@@ -158,9 +162,8 @@ CMax3SatProblem* CGAOptimizer::pc_GetOptimizer()
 	}
 }
 
-CGAIndividual* CGAOptimizer::pc_ChooseParent() // selekcja turniej
-{
-	int iRandPosition = rand() % (int)(vPopulation.size()/4); // bierzemy 20 najleoszych
+CGAIndividual* CGAOptimizer::pc_ChooseParent(){
+	int iRandPosition = rand() % (int)(vPopulation.size()/4);
 	//cout << "wybieram rodzica1 o indeksie: " << iRandPosition << endl;
 	CGAIndividual* pcVolunteer1 = vPopulation.at(iRandPosition);
 	//pcVolunteer1->vShow();
@@ -175,18 +178,4 @@ CGAIndividual* CGAOptimizer::pc_ChooseParent() // selekcja turniej
 	else {
 		return pcVolunteer2;
 	}
-}
-
-void CGAOptimizer::vTestFitness() { // dla kazdego rozwiazania wyznacz fitnes klauzl
-	CGAIndividual* pc_Indiv;
-	cout << "vTestFitness()" << endl;
-	for (int i = 0; i < (int)vPopulation.size(); i++) {
-		pc_Indiv = vPopulation.at(i);
-		for (int j = 0; j < (int)pc_Indiv->vGetGenotype().size(); j++) {
-			cout << pc_Indiv->vGetGenotype().at(j);
-		}
-		cout << endl << pc_Indiv->dFitness() << endl;
-		//cout << pc_Max3SatProblem->dCompute(pc_Indiv->vGetGenotype()) << endl;
-	}
-
 }
