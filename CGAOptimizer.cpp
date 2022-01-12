@@ -2,9 +2,9 @@
 using namespace std;
 
 CGAOptimizer::CGAOptimizer() {
-	i_popSize = 200; //TODO trzeba zmienic na jakies zdefiniowane
-	d_xProbability = 0.40;
-	d_mutProbability = 0.40;
+	i_popSize = SIZE_OF_POP;
+	d_xProbability = CROSS_PROBABILTY;
+	d_mutProbability = MUTATION_PROBABILITY;
 	vPopulation.reserve(i_popSize+1);
 	pc_Max3SatProblem = NULL;
 	cout << "CGAOptimizer()" << endl << "i_popSize =" << i_popSize << endl << "d_xProbability ="<< d_xProbability << endl << "d_mutProbability ="<< d_mutProbability << endl;
@@ -13,7 +13,7 @@ CGAOptimizer::CGAOptimizer() {
 
 CGAOptimizer::~CGAOptimizer()
 {
-	for (int i = 0; i < vPopulation.size(); i++) {
+	for (int i = 0; i < (int) vPopulation.size(); i++) {
 		delete vPopulation.at(i);
 	}
 	vPopulation.clear();
@@ -127,47 +127,45 @@ void CGAOptimizer::vRunIteration()
 		newVPop.push_back(dziecko2);
 	}
 	//uswanie starej populacji nie ma wyciekow
-	for (int i = 0; i < vPopulation.size(); i++) {
+	for (int i = 0; i < (int) vPopulation.size(); i++) {
 		delete vPopulation.at(i);
 	}
-	cout << vPopulation.size() << endl;
+	//cout << vPopulation.size() << endl;
 	vPopulation.clear();
-	cout << vPopulation.capacity() << endl;
-	cout << vPopulation.size() << endl;
+	//cout << vPopulation.capacity() << endl;
+	//cout << vPopulation.size() << endl;
 
 	vPopulation = newVPop;
 	vSort();
 	
 }
 
-
-
 void CGAOptimizer::vSort() {
 	sort(vPopulation.begin(), vPopulation.end(), [](CGAIndividual l,CGAIndividual r) { return l.dFitness() > r.dFitness(); });
 }
 
 void CGAOptimizer::vShowSolutions(){
-	for (int i = 0; i < vPopulation.size(); i++) {
+	for (int i = 0; i < (int) vPopulation.size(); i++) {
 		cout << i << "\t";
 		vPopulation.at(i)->vShow();
 	}
 }
 
-CMax3SatProblem* CGAOptimizer::pc_GetOptimizer(){
-	if (pc_Max3SatProblem != NULL) {
-		return pc_Max3SatProblem;
-	}
-	else {
-		return NULL;
-	}
-}
+//CMax3SatProblem* CGAOptimizer::pc_GetOptimizer(){
+	//if (pc_Max3SatProblem != NULL) {
+	//	return pc_Max3SatProblem;
+	//}
+	//else {
+		//return NULL;
+	//}
+//}
 
 CGAIndividual* CGAOptimizer::pc_ChooseParent(){
-	int iRandPosition = rand() % (int)(vPopulation.size()/4);
+	int iRandPosition = rand() % (int)(vPopulation.size() / 2);
 	//cout << "wybieram rodzica1 o indeksie: " << iRandPosition << endl;
 	CGAIndividual* pcVolunteer1 = vPopulation.at(iRandPosition);
 	//pcVolunteer1->vShow();
-	iRandPosition = rand() % (int)(vPopulation.size() / 4);
+	iRandPosition = rand() % (int)(vPopulation.size() / 2);
 	//cout << "wybieram rodzica2 o indeksie: " << iRandPosition << endl;
 	CGAIndividual* pcVolunteer2 = vPopulation.at(iRandPosition);
 	//pcVolunteer2->vShow();

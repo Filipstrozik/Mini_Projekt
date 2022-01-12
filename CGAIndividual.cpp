@@ -1,10 +1,11 @@
 #include "CGAIndividual.h"
 #include <time.h>
 
+const int DEFAULT_SIZE = 1000;
+
 CGAIndividual::CGAIndividual(){
 	d_currentFitness = 0.0;
-	vec_genotype.reserve(1000);
-
+	vec_genotype.reserve(DEFAULT_SIZE);
 }
 
 CGAIndividual::~CGAIndividual() { 
@@ -15,7 +16,7 @@ CGAIndividual::~CGAIndividual() {
 
 CGAIndividual::CGAIndividual(CGAIndividual* cOther)
 {
-	vec_genotype.reserve(1000);
+	vec_genotype.reserve(DEFAULT_SIZE);
 	for (int i = 0; i < cOther->vec_genotype.size(); i++) {
 		this->vec_genotype.push_back(cOther->vec_genotype.at(i));
 	}
@@ -23,7 +24,6 @@ CGAIndividual::CGAIndividual(CGAIndividual* cOther)
 }
 
 void CGAIndividual::vInitialize(CMax3SatProblem& cProblem) {
-	//d_currentFitness = 0.0;
 	for (int i = 0; i <= cProblem.iGetNumberOfVar(); i++) {
 		vec_genotype.push_back(rand() % 2);
 	}
