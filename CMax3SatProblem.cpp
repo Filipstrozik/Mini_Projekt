@@ -10,6 +10,13 @@ CMax3SatProblem::CMax3SatProblem() {
 	i_numberOfVar = 0;
 }
 
+CMax3SatProblem::~CMax3SatProblem(){
+	for (int i = 0; i < (int) vec_clausesProblem.size(); i++) {
+		delete vec_clausesProblem.at(i);
+	}
+	vec_clausesProblem.clear();
+}
+
 bool CMax3SatProblem::bLoad(std::string sPath) {
 	ifstream file;
 	file.open(sPath, std::ios::in);
@@ -74,7 +81,7 @@ double CMax3SatProblem::dCompute(std::vector<bool> vecSolution) {
 	// oblicz ile klauzyl jest spe³nionych
 	double counterGoodClauses = 0.0;
 	//cout << "R: " << endl;
-	for (int i = 0; i < vecSolution.size(); i++) {
+	for (int i = 0; i < (int) vecSolution.size(); i++) {
 		//cout << vecSolution.at(i);
 	}
 	//cout << endl;

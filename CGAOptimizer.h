@@ -28,8 +28,16 @@ private:
 	double d_xProbability;
 	double d_mutProbability;
 
-	std::vector<CGAIndividual*> vPopulation; 
+	std::vector<CGAIndividual*>* vPopulation; 
+	std::vector<CGAIndividual*>* newVPop;
+
+	CGAIndividual* rodzic1;
+	CGAIndividual* rodzic2;
+
+	CGAIndividual* dziecko1;
+	CGAIndividual* dziecko2;
+
 	CMax3SatProblem* pc_Max3SatProblem; 
-	//metoda prywatna
+	
 	CGAIndividual* pc_ChooseParent();
 };

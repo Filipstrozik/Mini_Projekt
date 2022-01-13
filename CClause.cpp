@@ -30,6 +30,10 @@ CClause::CClause(bool bFirstFlag, int iFirst, bool bSecondFlag, int iSecond, boo
     //std::cout << "Stworzono Clause: (" << b_FirstFlag << " " << i_first << ", " << b_SecondFlag << " " << i_second << ", " << b_ThirdFlag << " " << i_third << ")" << std::endl;
 }
 
+CClause::~CClause(){
+
+}
+
 bool CClause::bCompute(std::vector<bool> vecSolution)
 {
     return (

@@ -8,7 +8,7 @@ public:
 	CClause();
 	CClause( int iFirst, int iSecond, int iThird);
 	CClause(bool bFirstFlag, int iFirst, bool bSecondFlag, int iSecond, bool bThirdFlag, int iThird);
-
+	~CClause();
 	//getters
 	int iGetFirst() { return i_first; };
 	int iGetSecond() { return i_second; };
