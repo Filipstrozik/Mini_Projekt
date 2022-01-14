@@ -8,7 +8,7 @@ int main() {
     CGAOptimizer Optymalizator;
     Optymalizator.vInitialize("test.txt");
 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 100; i++) {
         cout << i << " ";
         Optymalizator.vRunIteration();
     }

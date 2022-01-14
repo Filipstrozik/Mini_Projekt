@@ -62,6 +62,7 @@ void CGAIndividual::vMutation(int dMutProb)
 			this->vec_genotype.at(index) = !vec_genotype.at(index);
 		}
 	}
+	//TODO: 
 }
 
 void CGAIndividual::vShow()
