@@ -16,6 +16,10 @@ public:
 	//crucial functions
 	void vInitialize(std::string sPath); 
 	void vRunIteration();
+	//setters
+	void vSetPop(int iSize);
+	void vSetXProbability(double dXProb);
+	void vSetMutProbability(double dMutProb);
 	//void show functions
 	void vSort();
 	void vShowSolutions();

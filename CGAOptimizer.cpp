@@ -14,7 +14,7 @@ CGAOptimizer::CGAOptimizer() {
 	rodzic2 = NULL;
 	dziecko1 = NULL;
 	dziecko2 = NULL;
-	cout << "CGAOptimizer()" << endl << "i_popSize =" << i_popSize << endl << "d_xProbability ="<< d_xProbability << endl << "d_mutProbability ="<< d_mutProbability << endl;
+	cout << "CGAOptimizer() - DEFAULT PROPERTIES (BEST ONE)" << endl << "i_popSize =" << i_popSize << endl << "d_xProbability ="<< d_xProbability << endl << "d_mutProbability ="<< d_mutProbability << endl;
 
 }
 
@@ -160,6 +160,27 @@ void CGAOptimizer::vRunIteration()
 	newVPop = temp;
 	vSort();
 	temp = NULL;
+}
+
+void CGAOptimizer::vSetPop(int iSize){
+	i_popSize = iSize;
+	if (vPopulation != NULL) delete vPopulation;
+	vPopulation = new vector<CGAIndividual*>;
+	(*vPopulation).reserve(i_popSize + 1);
+	if (newVPop != NULL) delete newVPop;
+	newVPop = new vector<CGAIndividual*>;
+	(*newVPop).reserve(i_popSize + 1);
+	cout << "vSetPop() - set amount of population." << endl << "i_popSize =" << i_popSize << endl;
+}
+
+void CGAOptimizer::vSetXProbability(double dXProb){
+	d_xProbability = dXProb;
+	cout << "vSetXProbability() - set Crossover probability." << endl << "d_xProbability =" << d_xProbability << endl;
+}
+
+void CGAOptimizer::vSetMutProbability(double dMutProb){
+	d_mutProbability = dMutProb;
+	cout << "vSetMutProbability() - set Mutation probability." << endl << "d_mutProbability =" << d_mutProbability << endl;
 }
 
 void CGAOptimizer::vSort() {
