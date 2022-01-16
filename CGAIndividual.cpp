@@ -1,7 +1,7 @@
 #include "CGAIndividual.h"
 #include <time.h>
 
-const int DEFAULT_SIZE = 1000;
+
 
 CGAIndividual::CGAIndividual(){
 	d_currentFitness = 0.0;
@@ -10,11 +10,10 @@ CGAIndividual::CGAIndividual(){
 
 CGAIndividual::~CGAIndividual() { 
 	
-	
 
 }
 
-CGAIndividual::CGAIndividual(CGAIndividual* cOther)
+CGAIndividual::CGAIndividual(const CGAIndividual* cOther)
 {
 	vec_genotype.reserve(DEFAULT_SIZE);
 	for (int i = 0; i < (int) cOther->vec_genotype.size(); i++) {
@@ -36,12 +35,12 @@ void CGAIndividual::pcCrossover(CGAIndividual* pcChild1, CGAIndividual* pcChild2
 	for (int i = 0; i < (int) this->vec_genotype.size(); i++) {
 		iFromWhichParent = rand() % 2;
 		if (iFromWhichParent == 0) {
-			pcChild1->vec_genotype.push_back(this->vec_genotype.at(i));
+			pcChild1->vec_genotype.push_back(vec_genotype.at(i));
 			pcChild2->vec_genotype.push_back(cOther->vec_genotype.at(i));
 		}
 		else {
 			pcChild1->vec_genotype.push_back(cOther->vec_genotype.at(i));
-			pcChild2->vec_genotype.push_back(this->vec_genotype.at(i));
+			pcChild2->vec_genotype.push_back(vec_genotype.at(i));
 		}
 	}
 }
@@ -57,12 +56,10 @@ void CGAIndividual::vMutation(int dMutProb)
 	for (int i = 0; i < (int) (vec_genotype.size()/15); i++) {
 		iDoMutate = rand() % 100;
 		if (iDoMutate < dMutProb) {
-			//std::cout << i << " ";
 			int index = rand() % vec_genotype.size();
 			this->vec_genotype.at(index) = !vec_genotype.at(index);
 		}
 	}
-	//TODO: 
 }
 
 void CGAIndividual::vShow()
@@ -71,7 +68,6 @@ void CGAIndividual::vShow()
 	for (int i = 0; i < (int) vec_genotype.size(); i++) {
 		std::cout << vec_genotype.at(i);
 	}
-	//std::cout << std::endl;
 	std::cout << "\t= " << d_currentFitness<<std::endl;
 }
 

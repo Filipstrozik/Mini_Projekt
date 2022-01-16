@@ -24,6 +24,8 @@ CGAOptimizer::~CGAOptimizer(){
 	dziecko2 = NULL;
 	delete rodzic1;
 	delete rodzic1;
+	delete dziecko1;
+	delete dziecko2;
 	
 	for (int i = 0; i < (int) (*vPopulation).size(); i++) {
 		delete (*vPopulation).at(i);
@@ -61,8 +63,10 @@ void CGAOptimizer::vRunIteration()
 	//wsadz 10 najlepszych z vPop "elitizm"
 
 	for (int i = 0; i < (int)((*vPopulation).size()/40) ; i++) {
-		CGAIndividual* temp = new CGAIndividual((*vPopulation).at(i));
+		CGAIndividual* temp = new CGAIndividual((*vPopulation).at(i)); // kopiowanie niby
 		(*newVPop).push_back(temp);
+		//(*newVPop).push_back((*vPopulation).at(i));
+		//(*vPopulation).at(i) = NULL;
 	}
 	
 
@@ -89,6 +93,7 @@ void CGAOptimizer::vRunIteration()
 			//cout << "NIE MA KRZYZOWANIE: " << endl;
 			dziecko1 = new CGAIndividual(rodzic1);
 			dziecko2 = new CGAIndividual(rodzic2);
+
 		}
 	
 		//cout << "POROWANANIE DZIEKO RODZIC" << endl;

@@ -9,9 +9,11 @@ class CMax3SatProblem
 public:
 	CMax3SatProblem();
 	~CMax3SatProblem();
+
 	//crucial functions
 	bool bLoad(std::string path);
 	double dCompute(std::vector<bool> vecSolution);
+
 	//getters
 	int iGetNumberOfVar();
 

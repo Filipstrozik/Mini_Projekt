@@ -1,16 +1,17 @@
 #pragma once
-
 #include "CGAIndividual.h"
 #include "CMax3SatProblem.h"
 #include <vector>
 
-const int SIZE_OF_POP = 200; 
-const double CROSS_PROBABILTY = 0.40;
-const double MUTATION_PROBABILITY = 0.40;
+#define SIZE_OF_POP 200
+#define CROSS_PROBABILTY 0.40
+#define MUTATION_PROBABILITY 0.40
+
 
 class CGAOptimizer
 {
 public:
+
 	CGAOptimizer();
 	~CGAOptimizer();
 	//crucial functions

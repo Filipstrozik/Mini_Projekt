@@ -6,9 +6,10 @@ class CClause
 {
 public:
 	CClause();
-	CClause( int iFirst, int iSecond, int iThird);
+	CClause(int iFirst, int iSecond, int iThird);
 	CClause(bool bFirstFlag, int iFirst, bool bSecondFlag, int iSecond, bool bThirdFlag, int iThird);
 	~CClause();
+
 	//getters
 	int iGetFirst() { return i_first; };
 	int iGetSecond() { return i_second; };
@@ -25,6 +26,7 @@ public:
 	void vSetFirstFlag(bool bNewFlag) { b_FirstFlag = bNewFlag; };
 	void vSetSecondFlag(bool bNewFlag) { b_SecondFlag = bNewFlag; };
 	void vSetThirdFlag(bool bNewFlag) { b_ThirdFlag = bNewFlag; };
+
 	//crucial functions
 	bool bCompute(std::vector<bool> vecSolution);
 ;
@@ -38,6 +40,4 @@ private:
 
 	bool bSetFlag(int iVar);
 	bool zmien(bool flaga, bool wynik);
-	
-
 };
