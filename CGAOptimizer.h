@@ -4,7 +4,7 @@
 #include <vector>
 
 #define SIZE_OF_POP 200
-#define CROSS_PROBABILTY 0.40
+#define CROSS_PROBABILTY 0.80
 #define MUTATION_PROBABILITY 0.40
 
 

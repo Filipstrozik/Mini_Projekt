@@ -5,16 +5,16 @@ using namespace std;
 
 
 int main() {
-    int iPop;
+    int iPop, iIterations;
     double dXProb, dMutProb;
     CGAOptimizer Optymalizator;
-    cin >> iPop >> dXProb >> dMutProb;
+    cin >>iIterations>>iPop >> dXProb >> dMutProb;
     Optymalizator.vSetPop(iPop);
     Optymalizator.vSetXProbability(dXProb);
     Optymalizator.vSetMutProbability(dMutProb);
     Optymalizator.vInitialize("test.txt");
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < iIterations; i++) {
         cout << i << " ";
         Optymalizator.vRunIteration();
     }

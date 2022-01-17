@@ -58,7 +58,7 @@ void CGAOptimizer::vInitialize(std::string sPath) {
 
 void CGAOptimizer::vRunIteration()
 {
-	(*vPopulation).at(0)->vShow();
+	//(*vPopulation).at(0)->vShow();
 	//newVPop.reserve(i_popSize);
 	//wsadz 10 najlepszych z vPop "elitizm"
 
