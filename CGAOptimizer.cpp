@@ -19,21 +19,23 @@ CGAOptimizer::CGAOptimizer() {
 
 CGAOptimizer::~CGAOptimizer(){
 	cout << "Destruktor ~CGAOptimizer()" << endl;
-	dziecko1 = NULL;
-	dziecko2 = NULL;
-	delete rodzic1;
-	delete rodzic1;
-	delete dziecko1;
-	delete dziecko2;
-	
-	for (int i = 0; i < (int) (*vPopulation).size(); i++) {
-		delete (*vPopulation).at(i);
+
+	for (int i = 0; i < (int)(*vPopulation).size(); i++) {
+		if ((*vPopulation).at(i) != NULL) {
+			delete (*vPopulation).at(i);
+		}
 	}
 	(*vPopulation).clear();
+	if (pc_Max3SatProblem != NULL) {
+		delete pc_Max3SatProblem;
+	}
+	if (vPopulation != NULL) {
+		delete vPopulation;
+	}
+	if (newVPop != NULL) {
+		delete newVPop;
+	}
 
-	delete pc_Max3SatProblem;
-	delete vPopulation;
-	delete newVPop;
 }
 
 void CGAOptimizer::vInitialize(string sPath) {
@@ -83,9 +85,13 @@ void CGAOptimizer::vRunIteration()
 
 	rodzic1 = NULL;
 	rodzic2 = NULL;
+	dziecko1 = NULL;
+	dziecko2 = NULL;
 
 	for (int i = 0; i < (int) (*vPopulation).size(); i++) {
-		delete (*vPopulation).at(i);
+		if ((*vPopulation).at(i) != NULL) {
+			delete (*vPopulation).at(i);
+		}
 	}
 	
 	(*vPopulation).clear();
