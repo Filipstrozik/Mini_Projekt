@@ -32,6 +32,8 @@ bool CMax3SatProblem::bLoad(string sPath) {
 	bool f2 = false;
 	int s3 = 0;
 	bool f3 = false;
+	int s4 = 0;
+	bool f4 = false;
 	char sign;
 	if (file.is_open()) {
 
@@ -63,8 +65,17 @@ bool CMax3SatProblem::bLoad(string sPath) {
 			}
 			file >> s3;
 			if (max < abs(s3)) max = s3;
+			file.ignore(2);
+			sign = file.peek();
+			if (sign == '-') {
+				f4 = true;
+				file.ignore();
+			}
+			file >> s4;
+			if (max < abs(s4)) max = s4;
+
 			file.ignore(100, '\n');
-			vec_clausesProblem.push_back(new CClause(f1,s1,f2,s2,f3,s3));
+			vec_clausesProblem.push_back(new CClause(f1,s1,f2,s2,f3,s3,f4,s4));
 			i_numberOfClauses++;
 			
 		}

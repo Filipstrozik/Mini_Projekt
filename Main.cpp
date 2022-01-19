@@ -13,7 +13,7 @@ int main() {
     Optymalizator.vSetPop(iPop);
     Optymalizator.vSetXProbability(dXProb);
     Optymalizator.vSetMutProbability(dMutProb);
-    Optymalizator.vInitialize("test.txt");
+    Optymalizator.vInitialize("test2.txt");
 
     for (int i = 0; i < iIterations; i++) {
         cout << i << " ";
