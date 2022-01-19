@@ -11,7 +11,9 @@ CMax3SatProblem::CMax3SatProblem() {
 
 CMax3SatProblem::~CMax3SatProblem(){
 	for (int i = 0; i < (int) vec_clausesProblem.size(); i++) {
-		delete vec_clausesProblem.at(i);
+		if (vec_clausesProblem.at(i) != NULL) {
+			delete vec_clausesProblem.at(i);
+		}
 	}
 	vec_clausesProblem.clear();
 }
