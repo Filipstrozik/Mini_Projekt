@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
+using namespace std;
 
 class CClause
 {
@@ -28,7 +29,7 @@ public:
 	void vSetThirdFlag(bool bNewFlag) { b_ThirdFlag = bNewFlag; };
 
 	//crucial functions
-	bool bCompute(std::vector<bool> vecSolution);
+	bool bCompute(vector<bool>* vecSolution);
 ;
 private:
 	int i_first;

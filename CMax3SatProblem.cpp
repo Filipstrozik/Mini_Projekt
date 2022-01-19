@@ -1,7 +1,6 @@
 #include "CMax3SatProblem.h"
 #include <fstream>
 #include <iostream>
-using namespace std;
 
 CMax3SatProblem::CMax3SatProblem() {
 	cout << "CMax3SatProblem()" << endl;
@@ -17,9 +16,9 @@ CMax3SatProblem::~CMax3SatProblem(){
 	vec_clausesProblem.clear();
 }
 
-bool CMax3SatProblem::bLoad(std::string sPath) {
+bool CMax3SatProblem::bLoad(string sPath) {
 	ifstream file;
-	file.open(sPath, std::ios::in);
+	file.open(sPath, ios::in);
 	
 	if (!file) {
 		cout << "blad przy otwiernaiu pliku" << endl;
@@ -76,21 +75,12 @@ bool CMax3SatProblem::bLoad(std::string sPath) {
 
 }
 
-double CMax3SatProblem::dCompute(std::vector<bool> vecSolution) {
-	//dla kazdej klauzuli oblicz czy jest spelniona czy nie
-	// oblicz ile klauzyl jest spe³nionych
+double CMax3SatProblem::dCompute(vector<bool>* vecSolution) {
 	double counterGoodClauses = 0.0;
-	//cout << "R: " << endl;
-	for (int i = 0; i < (int) vecSolution.size(); i++) {
-		//cout << vecSolution.at(i);
-	}
-	//cout << endl;
 	for (int i = 0; i < (int) vec_clausesProblem.size(); i++) {
 		if (vec_clausesProblem.at(i)->bCompute(vecSolution) ){
 			counterGoodClauses += 1.0;
-			
 		}
-		//cout << "K: " << i << " = " << vec_clausesProblem.at(i)->bCompute(vecSolution) << endl;
 	}
 	//cout << "nr GOODclauses : " << counterGoodClauses << " nr clauses: " << i_numberOfClauses << "fitness: "<< (double)(counterGoodClauses / i_numberOfClauses) <<endl;
 	return (double)(counterGoodClauses / i_numberOfClauses);
@@ -99,6 +89,5 @@ double CMax3SatProblem::dCompute(std::vector<bool> vecSolution) {
 int CMax3SatProblem::iGetNumberOfVar()
 {
 	return i_numberOfVar;
-
 }
 

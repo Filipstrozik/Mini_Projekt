@@ -17,7 +17,6 @@ CClause::CClause(int iFirst, int iSecond, int iThird) {
     i_first = abs(iFirst);
     i_second = abs(iSecond);
     i_third = abs(iThird);
-    //std::cout << "Stworzono Clause: (" << b_FirstFlag << " " << i_first << ", " << b_SecondFlag << " " << i_second << ", " << b_ThirdFlag << " " << i_third << ")" << std::endl;
 }
 
 CClause::CClause(bool bFirstFlag, int iFirst, bool bSecondFlag, int iSecond, bool bThirdFlag, int iThird) {
@@ -34,13 +33,11 @@ CClause::~CClause(){
 
 }
 
-bool CClause::bCompute(std::vector<bool> vecSolution)
+bool CClause::bCompute(vector<bool>* vecSolution)
 {
-    return (
-        zmien(bGetFirstFlag(),vecSolution.at(iGetFirst()))
-        or zmien(bGetSecondFlag(),vecSolution.at(iGetSecond()))
-        or zmien(bGetThirdFlag(),vecSolution.at(iGetThird()))
-        );
+    return (zmien(bGetFirstFlag(),(*vecSolution).at(iGetFirst()))
+        or zmien(bGetSecondFlag(),(*vecSolution).at(iGetSecond()))
+        or zmien(bGetThirdFlag(),(*vecSolution).at(iGetThird())));
 }
 
 

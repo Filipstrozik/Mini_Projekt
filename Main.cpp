@@ -8,7 +8,8 @@ int main() {
     int iPop, iIterations;
     double dXProb, dMutProb;
     CGAOptimizer Optymalizator;
-    cin >>iIterations>>iPop >> dXProb >> dMutProb;
+    cout << "wprowadz: Iteracje, Wielkosc Populacji, Prawd. Krzyzowania, Prawd. Mutacji:" << endl;
+    cin >> iIterations >> iPop>> dXProb >> dMutProb;
     Optymalizator.vSetPop(iPop);
     Optymalizator.vSetXProbability(dXProb);
     Optymalizator.vSetMutProbability(dMutProb);
