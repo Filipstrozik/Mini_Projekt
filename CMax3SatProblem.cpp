@@ -47,7 +47,7 @@ bool CMax3SatProblem::bLoad(string sPath) {
 				f1 = true;
 				file.ignore();
 			}
-			file >> s1;
+			file >> s1 ;
 			if (max < abs(s1)) max = s1;
 			file.ignore(2);
 			sign = file.peek();

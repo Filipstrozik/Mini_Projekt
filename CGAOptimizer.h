@@ -45,4 +45,9 @@ private:
 	CMax3SatProblem* pc_Max3SatProblem; 
 	
 	CGAIndividual* pc_ChooseParent();
+
+	CGAIndividual* mutate(CGAIndividual* child);
+
+	CGAIndividual* optimize(CGAIndividual* toOptimize, int step);
+
 };

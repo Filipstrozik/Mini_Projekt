@@ -72,12 +72,16 @@ void CGAOptimizer::vRunIteration()
 			dziecko2 = new CGAIndividual(rodzic2);
 		}
 
+
 		dziecko1->vMutation((int) (d_mutProbability * 100.0));
 		dziecko1->vCalculateFitness(*pc_Max3SatProblem);
+
+		//dziecko1 = mutate(dziecko1);
 
 		dziecko2->vMutation((int) (d_mutProbability * 100.0));
 		dziecko2->vCalculateFitness(*pc_Max3SatProblem);
 
+		//dziecko2 = mutate(dziecko2);
 
 		(*newVPop).push_back(dziecko1);
 		(*newVPop).push_back(dziecko2);
@@ -151,3 +155,38 @@ CGAIndividual* CGAOptimizer::pc_ChooseParent(){
 	}
 }
 
+CGAIndividual* CGAOptimizer::mutate(CGAIndividual* child) {
+	CGAIndividual* temp = new CGAIndividual(child);
+	temp->vMutation((int)(d_mutProbability * 100.0));
+	temp->vCalculateFitness(*pc_Max3SatProblem);
+	temp = optimize(temp, 1);
+	temp->vCalculateFitness(*pc_Max3SatProblem);
+
+	if (child->dFitness() < temp->dFitness()) {
+		delete child;
+		child = temp;
+	}
+	else {
+		delete temp;
+	}
+	return child;
+
+}
+
+CGAIndividual* CGAOptimizer::optimize(CGAIndividual* toOptimize, int step) {
+	CGAIndividual* bestOne = toOptimize;
+	CGAIndividual temp(toOptimize);
+
+	for (int i = 0; i < (int)toOptimize->vGetGenotype()->size(); i = i + step) {
+		temp.vGetGenotype()->at(i) = !temp.vGetGenotype()->at(i);
+		temp.vCalculateFitness(*pc_Max3SatProblem);
+		if (bestOne->dFitness() > temp.dFitness()) {
+			temp.vGetGenotype()->at(i) = !temp.vGetGenotype()->at(i);
+		}
+		else {
+			bestOne->vGetGenotype()->at(i) = !bestOne->vGetGenotype()->at(i);
+			bestOne->vCalculateFitness(*pc_Max3SatProblem);
+		}
+	}
+	return bestOne;
+}
