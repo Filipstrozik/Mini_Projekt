@@ -84,7 +84,6 @@ double CMax3SatProblem::dCompute(vector<bool>* vecSolution) {
 			counterGoodClauses += 1.0;
 		}
 	}
-	//cout << "nr GOODclauses : " << counterGoodClauses << " nr clauses: " << i_numberOfClauses << "fitness: "<< (double)(counterGoodClauses / i_numberOfClauses) <<endl;
 	return (double)(counterGoodClauses / i_numberOfClauses);
 }
 

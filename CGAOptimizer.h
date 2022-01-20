@@ -46,8 +46,6 @@ private:
 	
 	CGAIndividual* pc_ChooseParent();
 
-	CGAIndividual* mutate(CGAIndividual* child);
-
-	CGAIndividual* optimize(CGAIndividual* toOptimize, int step);
+	CGAIndividual* pc_OptimizeGreedy(CGAIndividual* toOptimize);
 
 };
